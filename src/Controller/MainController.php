@@ -21,7 +21,14 @@ class MainController extends AbstractController
      */
     public function aboutUs(): Response
     {
-        return $this->render('main/about_us.html.twig');
+        $projectRoot = $this->getParameter('kernel.project_dir');
+        $data = file_get_contents($projectRoot . '/data/team.json');
+        /** @var array $persons */
+        $persons = json_decode($data);
+
+        return $this->render('main/about_us.html.twig', [
+            'persons' => $persons
+        ]);
     }
 
 

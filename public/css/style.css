@@ -54,9 +54,23 @@ body > main {
     text-align: center;
 }
 
+.creators {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.creators > article img {
+    width: 100%;
+}
+
 @media screen and (max-width: 900px) {
     .container {
         width: 600px;
+    }
+
+    .creators {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -64,5 +78,9 @@ body > main {
     .container {
         width: 100%;
         padding: 0 1rem;
+    }
+
+    .creators {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

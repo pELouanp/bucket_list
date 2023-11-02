@@ -6,6 +6,28 @@
     <div class="container">
         <h1>A propos</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae ducimus eius molestiae odio. Architecto, distinctio doloremque dolores expedita facere illo nihil nobis numquam, obcaecati omnis quae saepe, sint voluptatibus!</p>
+
+        <h2>Créateurs du site</h2>
+
+        <section class="creators">
+            {% for person in persons %}
+                <article>
+                    <img src="{{ person.picture }}" alt="{{ person.firstname ~ ' ' ~ person.lastname }}">
+                    <div>
+                        <h3>
+                            {{ person.firstname ~ ' ' ~ person.lastname }}
+                            {% if person.firstname == 'Fabien' %}
+                                ❤️
+                            {% endif %}
+                        </h3>
+                        <time>Date de naissance : {{ person.dateOfBirth|date('d/m/Y') }}</time>
+                        <p>Créateur de : {{ person.creatorOf }}</p>
+                        <p>{{ person.description }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+
     </div>
 {% endblock %}
 
