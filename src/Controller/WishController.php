@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Wish;
-use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,11 +25,11 @@ class WishController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="wish_show")
+     * @Route("/{id}", name="wish_show", requirements={"id"="\d+"})
      */
-    public function show(int $id): Response
+    public function show(Wish $wish): Response
     {
-        return $this->render('wish/show.html.twig');
+        return $this->render('wish/show.html.twig', ['wish' => $wish]);
     }
 
 
