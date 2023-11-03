@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=WishRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Wish
 {
@@ -35,7 +36,7 @@ class Wish
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPublished;
+    private $isPublished = false;
 
     /**
      * @ORM\Column(type="datetime")
@@ -83,7 +84,7 @@ class Wish
         return $this;
     }
 
-    public function isIsPublished(): ?bool
+    public function isPublished(): ?bool
     {
         return $this->isPublished;
     }
@@ -105,5 +106,15 @@ class Wish
         $this->dateCreated = $dateCreated;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if ($this->getDateCreated() === null) {
+            $this->setDateCreated(new \DateTime());
+        }
     }
 }
