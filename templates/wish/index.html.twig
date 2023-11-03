@@ -6,6 +6,14 @@
     <div class="container">
         <h1>Liste des souhaits</h1>
 
-        <a href="{{ path('wish_show', {'id': 1}) }}">Test</a>
+        <section>
+            {% for wish in wishes %}
+                <article>
+                    <a href="{{ path('wish_show', {'id': wish.id}) }}">
+                        {{ wish.title }}
+                    </a>
+                </article>
+            {% endfor %}
+        </section>
     </div>
 {% endblock %}
