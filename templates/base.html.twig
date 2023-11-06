@@ -20,6 +20,19 @@
         {% include 'fragments/_header.html.twig' %}
     
         <main>
+
+            <div class="container">
+                {% block messages %}
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <p class="flash flash-{{ label }}">
+                                {{ message }}
+                            </p>
+                        {% endfor %}
+                    {% endfor %}
+                {% endblock %}
+            </div>
+
             {% block body %}{% endblock %}
         </main>
 
