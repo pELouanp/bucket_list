@@ -12,6 +12,7 @@
                     <a href="{{ path('wish_show', {'id': wish.id}) }}">
                         {{ wish.title }}
                     </a>
+                    ({{ wish.category.name }})
                 </article>
             {% endfor %}
         </section>
