@@ -5,7 +5,15 @@
 {% block body %}
     <div class="container">
         <h1>{{ wish.title }}</h1>
-        <p>{{ wish.author }} | {{ wish.dateCreated|date('d/m/Y') }} | {{ wish.category.name }}</p>
+        <p>
+            {{ wish.author }}
+            |
+            {{ wish.dateCreated|date('d/m/Y') }}
+            |
+            <a href="{{ path('category_show', {'id': wish.category.id}) }}">
+                {{ wish.category.name }}
+            </a>
+        </p>
         <p>{{ wish.description }}</p>
     </div>
 {% endblock %}

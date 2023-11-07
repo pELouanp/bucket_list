@@ -8,12 +8,7 @@
 
         <section>
             {% for wish in wishes %}
-                <article>
-                    <a href="{{ path('wish_show', {'id': wish.id}) }}">
-                        {{ wish.title }}
-                    </a>
-                    ({{ wish.category.name }})
-                </article>
+                {% include 'wish/_card.html.twig' %}
             {% endfor %}
         </section>
     </div>
