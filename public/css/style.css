@@ -54,6 +54,14 @@ body > main {
     text-align: center;
 }
 
+.site-footer .categories a {
+    padding: 0 0.5rem;
+}
+
+.site-footer .categories a:not(:last-child) {
+    border-right: black solid 1px;
+}
+
 .creators {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

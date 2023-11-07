@@ -91,4 +91,11 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('category_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    public function list(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('category/_list.html.twig', [
+            'categories' => $categoryRepository->findAll()
+        ]);
+    }
 }

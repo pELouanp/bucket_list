@@ -1,5 +1,8 @@
 <footer class="site-footer">
     <div class="container">
         <p>© Bucket-List 2021 - {{ 'now'|date('Y') }}</p>
+        <p class="categories">
+            {{ render(controller('App\\Controller\\CategoryController::list')) }}
+        </p>
     </div>
 </footer>
