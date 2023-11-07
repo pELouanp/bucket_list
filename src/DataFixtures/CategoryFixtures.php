@@ -20,6 +20,21 @@ class CategoryFixtures extends Fixture
         $manager->persist($sport);
         $this->addReference('cat-sport', $sport);
 
+        $entertainment = new Category();
+        $entertainment->setName('Entertainment');
+        $manager->persist($entertainment);
+        $this->addReference('cat-entertainment', $entertainment);
+
+        $humanRelations = new Category();
+        $humanRelations->setName('Human Relations');
+        $manager->persist($humanRelations);
+        $this->addReference('cat-human', $humanRelations);
+
+        $other = new Category();
+        $other->setName('Other');
+        $manager->persist($other);
+        $this->addReference('cat-other', $other);
+
         $manager->flush();
     }
 }
