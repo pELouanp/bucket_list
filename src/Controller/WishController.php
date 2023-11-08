@@ -63,6 +63,34 @@ class WishController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/edit", name="wish_edit")
+     * @IsGranted("ROLE_USER")
+     */
+    public function edit(Wish $wish, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->getUser() !== $wish->getUser() && !$this->isGranted("ROLE_ADMIN")) {
+            throw $this->createAccessDeniedException("Vous ne pouvez pas modifier ce souhait.");
+        }
+
+        $wishForm = $this->createForm(WishType::class, $wish);
+
+        $wishForm->handleRequest($request);
+
+        if ($wishForm->isSubmitted() && $wishForm->isValid()) {
+            $entityManager->persist($wish);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Souhait enregistré avec succès !');
+
+            return $this->redirectToRoute('wish_show', ['id' => $wish->getId()]);
+        }
+
+        return $this->render('wish/edit.html.twig', [
+            'wishForm' => $wishForm->createView()
+        ]);
+    }
+
 
 
 

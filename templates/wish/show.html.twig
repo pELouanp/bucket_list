@@ -15,6 +15,10 @@
             </a>
         </p>
         <p>{{ wish.description }}</p>
+
+        {% if app.user == wish.user %}
+            <a href="{{ path('wish_edit', {'id': wish.id}) }}">Modifier</a>
+        {% endif %}
     </div>
 {% endblock %}
 
