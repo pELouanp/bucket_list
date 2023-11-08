@@ -31,13 +31,6 @@ class Wish
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="Veuillez saisir un auteur")
-     * @Assert\Length(max=50, maxMessage="Veuillez saisir un auteur de moins de 50 caractères.")
-     */
-    private $author;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isPublished = true;
@@ -52,6 +45,12 @@ class Wish
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="wishes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -78,18 +77,6 @@ class Wish
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -136,6 +123,18 @@ class Wish
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
