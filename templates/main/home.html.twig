@@ -6,6 +6,13 @@
 
     <div class="container">
         <h1>Page accueil Bucket List</h1>
+
+        <section>
+            {% for wish in wishes %}
+                {% include 'wish/_card.html.twig' with {'wish': wish} only %}
+            {% endfor %}
+        </section>
+
     </div>
 
 {% endblock %}

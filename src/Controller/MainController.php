@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Wish;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +13,13 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function home(): Response
+    public function home(EntityManagerInterface $em): Response
     {
-        return $this->render('main/home.html.twig');
+        $wishRepository = $em->getRepository(Wish::class);
+
+        return $this->render('main/home.html.twig', [
+            'wishes' => $wishRepository->findBy(['isPublished' => true], ['dateCreated' => 'DESC'], 10)
+        ]);
     }
 
     /**
