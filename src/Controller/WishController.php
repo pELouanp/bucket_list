@@ -19,11 +19,12 @@ class WishController extends AbstractController
 {
     /**
      * @Route("/", name="wish_index")
+     * @IsGranted("ROLE_USER")
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
         $wishRepository = $entityManager->getRepository(Wish::class);
-        $wishes = $wishRepository->findBy(['isPublished' => true], ['dateCreated' => 'DESC']);
+        $wishes = $wishRepository->findBy(['user' => $this->getUser()], ['dateCreated' => 'DESC']);
 
         return $this->render('wish/index.html.twig', ['wishes' => $wishes]);
     }

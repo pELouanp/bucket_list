@@ -12,10 +12,10 @@
                 <li>
                     <a href="{{ path('about_us') }}">A propos</a>
                 </li>
-                <li>
-                    <a href="{{ path('wish_index') }}">Mes souhaits</a>
-                </li>
                 {% if app.user %}
+                    <li>
+                        <a href="{{ path('wish_index') }}">Mes souhaits</a>
+                    </li>
                     <li>
                         <a href="{{ path('wish_new') }}">Ajouter</a>
                     </li>
