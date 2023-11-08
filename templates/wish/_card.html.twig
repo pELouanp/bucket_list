@@ -1,6 +1,14 @@
 <article class="wish-card">
     <a href="{{ path('wish_show', {'id': wish.id}) }}">
-        {{ wish.title }}
+        <h3>{{ wish.title }}</h3>
     </a>
-    ({{ wish.category.name }})
+    <ul>
+        <li class="wish-card__category">
+            <a href="{{ path('category_show', {'id': wish.category.id}) }}">{{ wish.category.name }}</a>
+        </li>
+        <li class="wish-card__author">
+            <a href="#">{{ wish.user.pseudo }}</a>
+        </li>
+        <li class="wish-card__date">{{ wish.dateCreated|date('d-m-Y') }}</li>
+    </ul>
 </article>
