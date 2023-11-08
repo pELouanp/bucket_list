@@ -15,12 +15,21 @@
                 <li>
                     <a href="{{ path('wish_index') }}">Mes souhaits</a>
                 </li>
-                <li>
-                    <a href="{{ path('wish_new') }}">Ajouter</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_register') }}">Créer compte</a>
-                </li>
+                {% if app.user %}
+                    <li>
+                        <a href="{{ path('wish_new') }}">Ajouter</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_register') }}">Créer compte</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
     </div>
