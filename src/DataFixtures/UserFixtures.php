@@ -24,12 +24,14 @@ class UserFixtures extends Fixture
         $admin->setEmail('admin@bucket-list.com');
         $admin->setPassword($this->hasher->hashPassword($admin, '1234'));
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setIsVerified(true);
         $manager->persist($admin);
 
         $john = new User();
         $john->setPseudo('john');
         $john->setEmail('john@doe.fr');
         $john->setPassword($this->hasher->hashPassword($john, '1234'));
+        $john->setIsVerified(true);
         $manager->persist($john);
 
         $manager->flush();
