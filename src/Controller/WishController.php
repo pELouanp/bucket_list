@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Wish;
 use App\Form\WishType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,7 +42,11 @@ class WishController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $wish = new Wish();
+        $wish->setAuthor($user->getPseudo());
         $wishForm = $this->createForm(WishType::class, $wish);
 
         $wishForm->handleRequest($request);
