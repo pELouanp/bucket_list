@@ -26,6 +26,7 @@ class UserFixtures extends Fixture
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setIsVerified(true);
         $manager->persist($admin);
+        $this->addReference('user-admin', $admin);
 
         $john = new User();
         $john->setPseudo('john');
@@ -33,6 +34,7 @@ class UserFixtures extends Fixture
         $john->setPassword($this->hasher->hashPassword($john, '1234'));
         $john->setIsVerified(true);
         $manager->persist($john);
+        $this->addReference('user-john', $john);
 
         $manager->flush();
     }

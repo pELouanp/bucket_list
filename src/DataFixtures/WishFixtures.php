@@ -14,9 +14,12 @@ class WishFixtures extends Fixture implements DependentFixtureInterface
         $travel = $this->getReference('cat-travel');
         $sport = $this->getReference('cat-sport');
 
+        $admin = $this->getReference('user-admin');
+        $john = $this->getReference('user-john');
+
         $wish1 = new Wish();
         $wish1->setTitle('Sauter en parachute');
-        $wish1->setAuthor('Pierre');
+        $wish1->setUser($admin);
         $wish1->setDescription('Je voudrais tellement faire un saut en parachute !');
         $wish1->setDateCreated(new \DateTime('-1 month'));
         $wish1->setCategory($sport);
@@ -24,14 +27,14 @@ class WishFixtures extends Fixture implements DependentFixtureInterface
 
         $wish2 = new Wish();
         $wish2->setTitle('Visiter New York');
-        $wish2->setAuthor('Jean-Louis');
+        $wish2->setUser($john);
         $wish2->setIsPublished(false);
         $wish2->setCategory($travel);
         $manager->persist($wish2);
 
         $wish3 = new Wish();
         $wish3->setTitle('Gagner la coupe du monde de rubgy');
-        $wish3->setAuthor('Galtier');
+        $wish3->setUser($john);
         $wish3->setCategory($sport);
         $manager->persist($wish3);
 
@@ -42,7 +45,8 @@ class WishFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            CategoryFixtures::class // "App\Fixtures\CategoryFixtures"
+            CategoryFixtures::class, // "App\Fixtures\CategoryFixtures"
+            UserFixtures::class
         ];
     }
 }
