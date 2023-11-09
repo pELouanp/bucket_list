@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Wish;
 use App\Form\WishType;
+use App\Services\Censurator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +42,7 @@ class WishController extends AbstractController
      * @Route("/new", name="wish_new")
      * @IsGranted("ROLE_USER")
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Censurator $censurator): Response
     {
         $wish = new Wish();
         $wish->setUser($this->getUser());
@@ -50,6 +51,8 @@ class WishController extends AbstractController
         $wishForm->handleRequest($request);
 
         if ($wishForm->isSubmitted() && $wishForm->isValid()) {
+            $wish->setDescription($censurator->purify($wish->getDescription()));
+
             $entityManager->persist($wish);
             $entityManager->flush();
 
